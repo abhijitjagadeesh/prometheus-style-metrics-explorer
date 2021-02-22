@@ -34,5 +34,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "moment": "^2.29.1",
+    "plotly.js": "^1.58.4",
+    "react-icons": "^4.2.0",
+    "react-moment": "^1.1.1",
+    "react-plotly.js": "^2.5.1",
+    "socks5-node-fetch": "0.0.4"
   }
 }
