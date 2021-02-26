@@ -49,17 +49,15 @@ function App() {
   const [apiData, SetApiData] = useState("");
   //http://prometheus-control-plane-yes-production.router.techconsole-eks.aws.prod.techconsole.local/api/v1/query_range?query=linear_playback_success_rate_15m&start=1613513145&end=1613514045&step=15
   useEffect(() => {
-    if (executeValue) {
-      fetch("documents/sample.json")
-        // fetch(
-        //   "http://prometheus-control-plane-yes-production.router.techconsole-eks.aws.prod.techconsole.local/api/v1/query_range?query=linear_playback_success_rate_15m&start=1613513145&end=1613514045&step=15"
-        // )
-        .then((response) => response.json())
-        .then((response) => {
-          console.log(response);
-          handleAPIdata(response);
-        });
-    }
+    fetch(`documents/${exprValue}.json`)
+      // fetch(
+      //   "http://prometheus-control-plane-yes-production.router.techconsole-eks.aws.prod.techconsole.local/api/v1/query_range?query=linear_playback_success_rate_15m&start=1613513145&end=1613514045&step=15"
+      // )
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        handleAPIdata(response);
+      });
   }, [executeValue]);
 
   const handleExprChange = (event) => {
