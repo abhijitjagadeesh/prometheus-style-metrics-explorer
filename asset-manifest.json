@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/prometheus-style-metrics-explorer/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/prometheus-style-metrics-explorer/static/js/main.6ea66045.chunk.js",
+    "main.js.map": "/prometheus-style-metrics-explorer/static/js/main.6ea66045.chunk.js.map",
+    "runtime-main.js": "/prometheus-style-metrics-explorer/static/js/runtime-main.cbfc95aa.js",
+    "runtime-main.js.map": "/prometheus-style-metrics-explorer/static/js/runtime-main.cbfc95aa.js.map",
+    "static/js/2.187bbbc4.chunk.js": "/prometheus-style-metrics-explorer/static/js/2.187bbbc4.chunk.js",
+    "static/js/2.187bbbc4.chunk.js.map": "/prometheus-style-metrics-explorer/static/js/2.187bbbc4.chunk.js.map",
+    "index.html": "/prometheus-style-metrics-explorer/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/prometheus-style-metrics-explorer/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.187bbbc4.chunk.js.LICENSE.txt": "/prometheus-style-metrics-explorer/static/js/2.187bbbc4.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cbfc95aa.js",
+    "static/js/2.187bbbc4.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.6ea66045.chunk.js"
+  ]
+}
