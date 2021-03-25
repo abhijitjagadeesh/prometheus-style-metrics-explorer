@@ -1,4 +1,5 @@
 {
+  "homepage": "http://abhijitjagadeesh.github.io/prometheus-style-metrics-explorer",
   "name": "prometheus-metrics-explorer",
   "version": "0.1.0",
   "private": true,
