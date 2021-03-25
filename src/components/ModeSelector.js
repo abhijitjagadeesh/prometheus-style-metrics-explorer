@@ -9,10 +9,9 @@ import { PrometheusContext } from "../App";
 function ModeSelector() {
   const { mode } = useContext(PrometheusContext);
   const [darkMode, handleModeChange] = mode;
-  const [value, setValue] = React.useState("dark");
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    console.log(event.target.value);
     handleModeChange(event.target.value);
   };
 
@@ -34,20 +33,9 @@ function ModeSelector() {
         name="mode"
         defaultValue="dark"
         onChange={handleChange}
-        labelPlacement="start"
       >
-        <FormControlLabel
-          value="dark"
-          control={<Radio />}
-          label="Dark"
-          labelPlacement="bottom"
-        />
-        <FormControlLabel
-          value="light"
-          control={<Radio />}
-          label="Light"
-          labelPlacement="bottom"
-        />
+        <FormControlLabel value="dark" control={<Radio />} label="Dark" />
+        <FormControlLabel value="light" control={<Radio />} label="Light" />
       </RadioGroup>
     </FormControl>
   );

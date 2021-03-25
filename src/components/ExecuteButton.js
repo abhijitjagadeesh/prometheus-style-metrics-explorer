@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 function Execute() {
   const classes = useStyles();
   const { execute } = useContext(PrometheusContext);
-  const [executeValue, handleExecuteClick] = execute;
+  const handleExecuteClick = execute;
 
   return (
     <div>

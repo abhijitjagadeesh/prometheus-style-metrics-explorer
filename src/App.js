@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/core";
+import React, { useState, useEffect, useRef } from "react";
+import { makeStyles, ThemeProvider } from "@material-ui/core";
 import DarkTheme from "./utils/DarkTheme";
 import LightTheme from "./utils/LightTheme";
-import Navbar from "./components/Navbar";
-import TextField from "@material-ui/core/TextField";
+import Header from "./components/Header";
 import ExecuteButton from "./components/ExecuteButton";
+import Expression from "./components/Expression";
 import ViewTab from "./components/ViewTab";
 import { supportedApis } from "./components/SupportedApis";
 import Footer from "./components/Footer";
@@ -30,34 +29,45 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function isSupported(val) {
-  return supportedApis.indexOf(val) > -1 ? "" : "This API is not supported !";
+function isSupported(expr) {
+  return supportedApis.indexOf(expr) > -1 ? "" : "Metric is not supported !";
 }
 
-function isEmpty(val) {
-  return val.length > 0 ? "" : "Expression field cannot be empty !";
+function isEmpty(expr) {
+  return expr.length > 0 ? "" : "Expression field cannot be empty !";
 }
 
 function App() {
   const classes = useStyles();
   const [exprValue, SetExprValue] = useState("");
   const [errors, SetErrors] = useState([]);
-  const [executeValue, SetExecuteValue] = useState(false);
+  const [executeValue, SetExecuteValue] = useState();
   const [apiData, SetApiData] = useState("");
   const [darkMode, SetDarkMode] = useState(true);
-  //http://prometheus-control-plane-yes-production.router.techconsole-eks.aws.prod.techconsole.local/api/v1/query_range?query=linear_playback_success_rate_15m&start=1613513145&end=1613514045&step=15
+  const initialRender = useRef(true);
+
   useEffect(() => {
-    fetch(`documents/${exprValue}.json`)
-      // fetch(
-      //   "http://prometheus-control-plane-yes-production.router.techconsole-eks.aws.prod.techconsole.local/api/v1/query_range?query=linear_playback_success_rate_15m&start=1613513145&end=1613514045&step=15"
-      // )
-      .then((response) => response.json())
-      .then((response) => {
-        handleAPIdata(response);
-      });
+    // console.log(errors);
+    if (initialRender.current) {
+      initialRender.current = false;
+    } else {
+      if (errors.join("") === "") {
+        fetch(`documents/${exprValue}.json`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((response) => {
+            handleAPIdata(response);
+          });
+      }
+    }
   }, [executeValue]);
 
   const handleExprChange = (event) => {
+    console.log(event.target.value);
     SetExprValue(event.target.value);
   };
 
@@ -81,30 +91,19 @@ function App() {
   return (
     <PrometheusContext.Provider
       value={{
-        expr: [exprValue, handleExprChange],
+        expr: handleExprChange,
         error: errors,
-        execute: [executeValue, handleExecuteClick],
+        execute: handleExecuteClick,
         apidata: apiData,
         mode: [darkMode, handleModeChange],
       }}
     >
       <ThemeProvider theme={darkMode ? DarkTheme : LightTheme}>
         <CssBaseline />
-        <Navbar />
+        <Header />
         <ModeSelector />
-        <TextField
-          id="standard-full-width"
-          size="medium"
-          className={classes.textfield}
-          placeholder="Enter expression here"
-          margin="normal"
-          multiline
-          variant="outlined"
-          onChange={handleExprChange}
-        />
-        {errors.length > 0 ? (
-          <div className={classes.validationFailed}>{errors.join("")}</div>
-        ) : null}
+        <Expression />
+        <div className={classes.validationFailed}>{errors.join("")}</div>
         <ExecuteButton />
         <ViewTab />
         <Footer />

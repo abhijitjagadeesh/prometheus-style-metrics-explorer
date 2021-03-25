@@ -28,7 +28,7 @@ function Graph() {
     });
   }
 
-  return apiData == "" || errors.join("") !== "" ? null : (
+  return errors.join("") !== "" ? null : (
     <div>
       <Plot
         data={[
